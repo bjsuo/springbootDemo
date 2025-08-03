@@ -21,3 +21,13 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+
+    - name: Build, tag, and push image to Amazon ECR
+      id: build-image
+      
+      run: |
+        # Build a docker container and
+        # push it to ECR so that it can
+        # be deployed to ECS.
+        docker build -t zhuzhangsuo:v1 .
+        echo "image ok" >> $GITHUB_OUTPUT
